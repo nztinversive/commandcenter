@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: atlas-command-center
+    env: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GITHUB_TOKEN
+        sync: false  # Optional: set in Render dashboard for higher API rate limits

@@ -1,0 +1,132 @@
+[
+  {
+    "id": "taskboard",
+    "name": "Taskboard",
+    "emoji": "⚡",
+    "description": "Kanban task management with drag-drop and project filtering",
+    "stack": ["Next.js 14", "Tailwind", "dnd-kit", "Upstash"],
+    "liveUrl": "https://atlas-taskboard.onrender.com",
+    "healthEndpoint": "/api/tasks",
+    "githubRepo": "nztinversive/taskboard",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/taskboard/blob/main/docs/prd.md" }
+    ]
+  },
+  {
+    "id": "shiftboard",
+    "name": "ShiftBoard",
+    "emoji": "🏭",
+    "description": "Factory floor kiosk for workforce management and station tracking",
+    "stack": ["Next.js 14", "Prisma 7", "PostgreSQL", "Oswald"],
+    "liveUrl": null,
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/shiftboard",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/shiftboard/blob/main/docs/prd.md" }
+    ]
+  },
+  {
+    "id": "contentops",
+    "name": "ContentOps",
+    "emoji": "✍️",
+    "description": "Hormozi-style content generation engine with brand voice and proof vault",
+    "stack": ["Next.js 14", "OpenAI", "Tailwind", "JSON Storage"],
+    "liveUrl": "https://contentops.onrender.com",
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/contentops",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/contentops/blob/main/docs/prd.md" }
+    ]
+  },
+  {
+    "id": "fwimagestudio",
+    "name": "FW Image Studio",
+    "emoji": "🎨",
+    "description": "AI image generation with Flux, inpainting, and Telegram integration",
+    "stack": ["Next.js 14", "Replicate API", "Tailwind", "Canvas"],
+    "liveUrl": null,
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/fwimagestudio",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/fwimagestudio/blob/main/docs/prd.md" }
+    ]
+  },
+  {
+    "id": "fwsalesmap",
+    "name": "FW Sales Map",
+    "emoji": "🗺️",
+    "description": "Interactive Mapbox map for FW sales pipeline and property tracking",
+    "stack": ["Next.js 14", "Mapbox GL JS", "Tailwind", "JSON Storage"],
+    "liveUrl": null,
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/fwsalesmap",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/fwsalesmap/blob/main/docs/prd.md" }
+    ]
+  },
+  {
+    "id": "fwsitechecker",
+    "name": "FW Site Checker",
+    "emoji": "📍",
+    "description": "AI-powered construction site analysis and zoning validation",
+    "stack": ["Next.js 14", "Mapbox GL JS", "OpenAI", "Tailwind"],
+    "liveUrl": null,
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/fwsitechecker",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/fwsitechecker/blob/main/docs/prd.md" }
+    ]
+  },
+  {
+    "id": "duckyjengalofi",
+    "name": "Ducky Jenga Lo-Fi",
+    "emoji": "🎵",
+    "description": "Interactive lo-fi YouTube game with ambient duck vibes",
+    "stack": ["Next.js 14", "YouTube API", "Canvas", "Tailwind"],
+    "liveUrl": null,
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/duckyjengalofi",
+    "links": [
+      { "label": "Game", "url": "https://github.com/nztinversive/duckyjengalofi" }
+    ]
+  },
+  {
+    "id": "claritydashboard",
+    "name": "Clarity Dashboard",
+    "emoji": "🎯",
+    "description": "BSC strategy dashboard with goal hierarchy and one-on-one mode",
+    "stack": ["Next.js 16", "Prisma 7", "NextAuth v5", "shadcn/ui"],
+    "liveUrl": null,
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/claritydashboard",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/claritydashboard/blob/main/docs/prd.md" }
+    ]
+  },
+  {
+    "id": "fwlandingpage",
+    "name": "FW Landing Page",
+    "emoji": "🏠",
+    "description": "Fading West marketing site showcasing modular home construction",
+    "stack": ["Next.js", "Tailwind"],
+    "liveUrl": null,
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/fwlandingpage",
+    "links": [
+      { "label": "Marketing", "url": "https://github.com/nztinversive/fwlandingpage" }
+    ]
+  },
+  {
+    "id": "fwmodpicker",
+    "name": "FW Mod Picker",
+    "emoji": "🏗️",
+    "description": "Customer-facing modular home configuration tool",
+    "stack": ["React", "Tailwind"],
+    "liveUrl": null,
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/fwmodpicker",
+    "links": [
+      { "label": "Config Tool", "url": "https://github.com/nztinversive/fwmodpicker" }
+    ]
+  }
+]
