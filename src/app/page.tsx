@@ -1,18 +1,30 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Project, HealthStatus, GitHubInfo, ProjectWithStatus, DashboardStats } from '@/lib/projects';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  Project,
+  HealthStatus,
+  GitHubInfo,
+  LiveHealthPing,
+  ProjectWithStatus,
+  DashboardStats
+} from '@/lib/projects';
 import ProjectCard from '@/components/ProjectCard';
 import StatsBar from '@/components/StatsBar';
+
+const normalizeUrl = (url: string) => url.replace(/\/+$/, '').toLowerCase();
 
 export default function Dashboard() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [healthData, setHealthData] = useState<HealthStatus[]>([]);
   const [githubData, setGithubData] = useState<GitHubInfo[]>([]);
+  const [liveHealthData, setLiveHealthData] = useState<LiveHealthPing[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [lastUpdate, setLastUpdate] = useState<string>(new Date().toISOString());
+  const [lastHealthCheckedAt, setLastHealthCheckedAt] = useState<string | null>(null);
+  const [nowMs, setNowMs] = useState<number>(() => Date.now());
 
   // Load projects data
   useEffect(() => {
@@ -26,8 +38,14 @@ export default function Dashboard() {
       .catch(err => console.error('Failed to load projects:', err));
   }, []);
 
+  // Keep a lightweight timer for "Last checked: X seconds ago"
+  useEffect(() => {
+    const interval = setInterval(() => setNowMs(Date.now()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   // Fetch health and GitHub data
-  const fetchData = async (isRefresh = false) => {
+  const fetchData = useCallback(async (isRefresh = false) => {
     if (isRefresh) {
       setIsRefreshing(true);
     } else {
@@ -35,19 +53,26 @@ export default function Dashboard() {
     }
 
     try {
-      const [healthRes, githubRes] = await Promise.all([
+      const [healthRes, githubRes, liveHealthRes] = await Promise.all([
         fetch('/api/status'),
-        fetch('/api/github')
+        fetch('/api/github'),
+        fetch('/api/health')
       ]);
 
       if (healthRes.ok) {
-        const healthData = await healthRes.json();
-        setHealthData(healthData);
+        const statusData: HealthStatus[] = await healthRes.json();
+        setHealthData(statusData);
       }
 
       if (githubRes.ok) {
-        const githubData = await githubRes.json();
-        setGithubData(githubData);
+        const githubPayload: GitHubInfo[] = await githubRes.json();
+        setGithubData(githubPayload);
+      }
+
+      if (liveHealthRes.ok) {
+        const liveHealthPayload: LiveHealthPing[] = await liveHealthRes.json();
+        setLiveHealthData(liveHealthPayload);
+        setLastHealthCheckedAt(new Date().toISOString());
       }
 
       setLastUpdate(new Date().toISOString());
@@ -57,31 +82,52 @@ export default function Dashboard() {
       setIsLoading(false);
       setIsRefreshing(false);
     }
-  };
+  }, []);
 
   // Initial data fetch
   useEffect(() => {
-    fetchData();
-  }, []);
+    void fetchData();
+  }, [fetchData]);
 
   // Auto-refresh every 60 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchData(true);
+      void fetchData(true);
     }, 60000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchData]);
+
+  const liveHealthByUrl = useMemo(() => {
+    const entries = liveHealthData.map((ping) => [normalizeUrl(ping.url), ping] as const);
+    return new Map<string, LiveHealthPing>(entries);
+  }, [liveHealthData]);
 
   // Combine project data with health and GitHub info
   const projectsWithStatus: ProjectWithStatus[] = projects.map(project => {
-    const health = healthData.find(h => h.projectId === project.id) || {
+    const fallbackHealth = healthData.find(h => h.projectId === project.id) || {
       projectId: project.id,
       status: 'unchecked' as const,
       responseTimeMs: null,
       lastChecked: new Date().toISOString(),
       error: 'Not checked yet'
     };
+
+    const livePing = project.liveUrl
+      ? liveHealthByUrl.get(normalizeUrl(project.liveUrl))
+      : undefined;
+
+    const health: HealthStatus = livePing
+      ? {
+          projectId: project.id,
+          status: livePing.status === 'up' ? 'healthy' : 'down',
+          responseTimeMs: livePing.responseMs,
+          lastChecked: lastHealthCheckedAt ?? fallbackHealth.lastChecked,
+          error: livePing.status === 'down'
+            ? (livePing.statusCode ? `HTTP ${livePing.statusCode}` : 'Service unreachable')
+            : null
+        }
+      : fallbackHealth;
 
     const github = githubData.find(g => g.projectId === project.id) || null;
 
@@ -105,6 +151,9 @@ export default function Dashboard() {
     totalCommits24h: githubData.reduce((sum, g) => sum + g.commitCount24h, 0),
     lastChecked: lastUpdate
   };
+  const healthAgeSeconds = lastHealthCheckedAt
+    ? Math.max(0, Math.floor((nowMs - new Date(lastHealthCheckedAt).getTime()) / 1000))
+    : null;
 
   if (isLoading) {
     return (
@@ -126,14 +175,21 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <div className="px-6 py-6">
-        {searchQuery && (
-          <div className="mb-6">
-            <span className="text-white/60 text-sm">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <span className="text-white/60 text-sm">
+            {searchQuery ? (
+              <>
               Showing {filteredProjects.length} of {projects.length} projects
               {searchQuery && ` matching "${searchQuery}"`}
-            </span>
-          </div>
-        )}
+              </>
+            ) : (
+              ''
+            )}
+          </span>
+          <span className="text-white/40 text-xs">
+            Last checked: {healthAgeSeconds === null ? 'Not checked yet' : `${healthAgeSeconds}s ago`}
+          </span>
+        </div>
 
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -51,7 +51,7 @@ export default function ProjectCard({ projectWithStatus }: ProjectCardProps) {
               </a>
             </div>
             <div className="flex items-center gap-3 text-sm">
-              {health.responseTimeMs && (
+              {health.responseTimeMs !== null && health.status !== 'down' && (
                 <span className={getStatusColor(health.status)}>
                   {health.responseTimeMs}ms
                 </span>

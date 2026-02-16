@@ -18,6 +18,13 @@ export interface HealthStatus {
   error: string | null;
 }
 
+export interface LiveHealthPing {
+  url: string;
+  status: 'up' | 'down';
+  responseMs: number;
+  statusCode: number | null;
+}
+
 export interface GitHubInfo {
   projectId: string;
   lastCommitMessage: string;
