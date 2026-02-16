@@ -44,7 +44,7 @@
     "emoji": "🎨",
     "description": "AI image generation with Flux, inpainting, and Telegram integration",
     "stack": ["Next.js 14", "Replicate API", "Tailwind", "Canvas"],
-    "liveUrl": null,
+    "liveUrl": "https://fw-image-studio.onrender.com",
     "healthEndpoint": "/api/health",
     "githubRepo": "nztinversive/fwimagestudio",
     "links": [
@@ -57,7 +57,7 @@
     "emoji": "🗺️",
     "description": "Interactive Mapbox map for FW sales pipeline and property tracking",
     "stack": ["Next.js 14", "Mapbox GL JS", "Tailwind", "JSON Storage"],
-    "liveUrl": null,
+    "liveUrl": "https://fw-salesmap.onrender.com",
     "healthEndpoint": "/api/health",
     "githubRepo": "nztinversive/fwsalesmap",
     "links": [
@@ -70,7 +70,7 @@
     "emoji": "📍",
     "description": "AI-powered construction site analysis and zoning validation",
     "stack": ["Next.js 14", "Mapbox GL JS", "OpenAI", "Tailwind"],
-    "liveUrl": null,
+    "liveUrl": "https://fw-sitechecker.onrender.com",
     "healthEndpoint": "/api/health",
     "githubRepo": "nztinversive/fwsitechecker",
     "links": [
@@ -101,6 +101,32 @@
     "githubRepo": "nztinversive/claritydashboard",
     "links": [
       { "label": "PRD", "url": "https://github.com/nztinversive/claritydashboard/blob/main/docs/prd.md" }
+    ]
+  },
+  {
+    "id": "fw3dwalkthrough",
+    "name": "FW 3D Walkthrough",
+    "emoji": "🏠",
+    "description": "360° panorama viewer with drag-drop uploads and public shareable links",
+    "stack": ["Next.js 14", "Pannellum", "Tailwind", "JSON Storage"],
+    "liveUrl": "https://fw-3d-walkthrough.onrender.com",
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/fw3dwalkthrough",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/fw3dwalkthrough/blob/main/docs/prd.md" }
+    ]
+  },
+  {
+    "id": "homedesign-ai",
+    "name": "Home Design AI",
+    "emoji": "🏗️",
+    "description": "AI floor plan generator with constraint engine and 3D visualization",
+    "stack": ["Next.js 14", "TypeScript", "Convex", "Three.js"],
+    "liveUrl": null,
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/homedesign-ai",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/homedesign-ai/blob/main/docs/prd.md" }
     ]
   },
   {
