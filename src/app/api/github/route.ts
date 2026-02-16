@@ -6,6 +6,38 @@ import { Project, GitHubInfo } from '@/lib/projects';
 // Cache GitHub data for 5 minutes to respect rate limits
 const cache = new Map<string, { data: GitHubInfo; timestamp: number }>();
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+let hasLoggedMissingTokenWarning = false;
+
+function createGithubFallback(project: Project, lastCommitMessage = 'API Error'): GitHubInfo {
+  return {
+    projectId: project.id,
+    lastCommitMessage,
+    lastCommitDate: new Date().toISOString(),
+    commitCount24h: 0
+  };
+}
+
+function getGitHubHeaders(): Record<string, string> {
+  const headers: Record<string, string> = {
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': 'Atlas-Command-Center/1.0'
+  };
+
+  const token = process.env.GITHUB_TOKEN;
+  if (token) {
+    headers['Authorization'] = `token ${token}`;
+  } else if (!hasLoggedMissingTokenWarning) {
+    console.warn('GITHUB_TOKEN is not set; GitHub API requests are unauthenticated and may be rate-limited.');
+    hasLoggedMissingTokenWarning = true;
+  }
+
+  return headers;
+}
+
+function isGitHubRateLimited(response: Response): boolean {
+  const remaining = response.headers.get('x-ratelimit-remaining');
+  return response.status === 403 && remaining !== null && Number(remaining) <= 0;
+}
 
 async function fetchGitHubInfo(project: Project): Promise<GitHubInfo> {
   // Check cache first
@@ -14,6 +46,7 @@ async function fetchGitHubInfo(project: Project): Promise<GitHubInfo> {
   if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
     return cached.data;
   }
+  const staleCached = cached?.data;
 
   try {
     const [owner, repo] = project.githubRepo.split('/');
@@ -24,18 +57,19 @@ async function fetchGitHubInfo(project: Project): Promise<GitHubInfo> {
     since.setHours(since.getHours() - 24);
     
     const commitsUrl = `${baseUrl}/repos/${owner}/${repo}/commits?since=${since.toISOString()}&per_page=100`;
-    
-    const headers: HeadersInit = {
-      'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': 'Atlas-Command-Center/1.0'
-    };
-    
-    // Add authorization if token is available
-    if (process.env.GITHUB_TOKEN) {
-      headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
-    }
+    const headers = getGitHubHeaders();
 
     const commitsResponse = await fetch(commitsUrl, { headers });
+
+    if (isGitHubRateLimited(commitsResponse)) {
+      if (staleCached) {
+        console.warn(`GitHub rate limit hit for ${project.githubRepo}; returning stale cached data.`);
+        return staleCached;
+      }
+
+      console.warn(`GitHub rate limit hit for ${project.githubRepo} and no stale cache is available.`);
+      return createGithubFallback(project, 'Rate limited');
+    }
     
     if (!commitsResponse.ok) {
       throw new Error(`GitHub API error: ${commitsResponse.status}`);
@@ -50,6 +84,15 @@ async function fetchGitHubInfo(project: Project): Promise<GitHubInfo> {
     let lastCommitMessage = 'No commits';
     let lastCommitDate = new Date().toISOString();
     
+    if (isGitHubRateLimited(latestResponse)) {
+      if (staleCached) {
+        console.warn(`GitHub rate limit hit for ${project.githubRepo}; returning stale cached data.`);
+        return staleCached;
+      }
+
+      console.warn(`GitHub rate limit hit for ${project.githubRepo} and no stale cache is available.`);
+    }
+
     if (latestResponse.ok) {
       const latestCommit = await latestResponse.json();
       lastCommitMessage = latestCommit.commit.message.split('\n')[0]; // First line only
@@ -69,14 +112,14 @@ async function fetchGitHubInfo(project: Project): Promise<GitHubInfo> {
     return githubInfo;
   } catch (error: unknown) {
     console.error(`GitHub API error for ${project.githubRepo}:`, error);
+
+    if (staleCached) {
+      console.warn(`GitHub API error for ${project.githubRepo}; returning stale cached data.`);
+      return staleCached;
+    }
     
     // Return placeholder data on error
-    const githubInfo: GitHubInfo = {
-      projectId: project.id,
-      lastCommitMessage: 'API Error',
-      lastCommitDate: new Date().toISOString(),
-      commitCount24h: 0
-    };
+    const githubInfo = createGithubFallback(project);
 
     // Cache error responses for shorter duration
     cache.set(cacheKey, { data: githubInfo, timestamp: Date.now() });
