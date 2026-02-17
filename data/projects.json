@@ -3,138 +3,41 @@
     "id": "taskboard",
     "name": "Taskboard",
     "emoji": "⚡",
-    "description": "Kanban task management with drag-drop and project filtering",
-    "stack": ["Next.js 14", "Tailwind", "dnd-kit", "Upstash"],
+    "description": "Kanban task management with drag-drop, project filtering, notes, ideas, and GitHub webhook auto-invoicing",
+    "stack": ["Next.js 14", "Tailwind", "dnd-kit", "Upstash Redis"],
     "liveUrl": "https://atlas-taskboard.onrender.com",
     "healthEndpoint": "/api/tasks",
     "githubRepo": "nztinversive/taskboard",
-    "links": [
-      { "label": "PRD", "url": "https://github.com/nztinversive/taskboard/blob/main/docs/prd.md" }
-    ]
+    "links": []
   },
   {
     "id": "shiftboard",
     "name": "ShiftBoard",
     "emoji": "🏭",
     "description": "Factory floor kiosk for workforce management and station tracking",
-    "stack": ["Next.js 14", "Prisma 7", "PostgreSQL", "Oswald"],
+    "stack": ["Next.js 14", "Prisma 7", "PostgreSQL"],
     "liveUrl": null,
     "healthEndpoint": "/api/health",
     "githubRepo": "nztinversive/shiftboard",
-    "links": [
-      { "label": "PRD", "url": "https://github.com/nztinversive/shiftboard/blob/main/docs/prd.md" }
-    ]
+    "links": []
   },
   {
     "id": "contentops",
     "name": "ContentOps",
     "emoji": "✍️",
-    "description": "Hormozi-style content generation engine with brand voice and proof vault",
-    "stack": ["Next.js 14", "OpenAI", "Convex", "Tailwind", "NextAuth"],
+    "description": "Hormozi-style content engine with brand voice, proof vault, rate limiting, and input validation",
+    "stack": ["Next.js 14", "OpenAI gpt-5-mini", "Tailwind", "JSON Storage"],
     "liveUrl": "https://contentops.onrender.com",
-    "healthEndpoint": "/api/health",
+    "healthEndpoint": "/",
     "githubRepo": "nztinversive/contentops",
-    "links": [
-      { "label": "PRD", "url": "https://github.com/nztinversive/contentops/blob/main/docs/prd.md" }
-    ]
-  },
-  {
-    "id": "fwimagestudio",
-    "name": "FW Image Studio",
-    "emoji": "🎨",
-    "description": "AI image generation with Flux, inpainting, and Telegram integration",
-    "stack": ["Next.js 14", "Replicate API", "Tailwind", "Canvas"],
-    "liveUrl": null,
-    "healthEndpoint": "/api/health",
-    "githubRepo": "nztinversive/fwimagestudio",
-    "links": [
-      { "label": "PRD", "url": "https://github.com/nztinversive/fwimagestudio/blob/main/docs/prd.md" }
-    ]
-  },
-  {
-    "id": "fwsalesmap",
-    "name": "FW Sales Map",
-    "emoji": "🗺️",
-    "description": "Interactive Mapbox map for FW sales pipeline and property tracking",
-    "stack": ["Next.js 14", "Mapbox GL JS", "Tailwind", "JSON Storage"],
-    "liveUrl": null,
-    "healthEndpoint": "/api/health",
-    "githubRepo": "nztinversive/fwsalesmap",
-    "links": [
-      { "label": "PRD", "url": "https://github.com/nztinversive/fwsalesmap/blob/main/docs/prd.md" }
-    ]
-  },
-  {
-    "id": "fwsitechecker",
-    "name": "FW Site Checker",
-    "emoji": "📍",
-    "description": "AI-powered construction site analysis and zoning validation",
-    "stack": ["Next.js 14", "Mapbox GL JS", "OpenAI", "Tailwind"],
-    "liveUrl": null,
-    "healthEndpoint": "/api/health",
-    "githubRepo": "nztinversive/fwsitechecker",
-    "links": [
-      { "label": "PRD", "url": "https://github.com/nztinversive/fwsitechecker/blob/main/docs/prd.md" }
-    ]
-  },
-  {
-    "id": "duckyjengalofi",
-    "name": "Ducky Jenga Lo-Fi",
-    "emoji": "🎵",
-    "description": "Interactive lo-fi YouTube game with ambient duck vibes",
-    "stack": ["Next.js 14", "YouTube API", "Canvas", "Tailwind"],
-    "liveUrl": null,
-    "healthEndpoint": "/",
-    "githubRepo": "nztinversive/duckyjengalofi",
-    "links": [
-      { "label": "Game", "url": "https://github.com/nztinversive/duckyjengalofi" }
-    ]
-  },
-  {
-    "id": "claritydashboard",
-    "name": "Clarity Dashboard",
-    "emoji": "🎯",
-    "description": "BSC strategy dashboard with goal hierarchy and one-on-one mode",
-    "stack": ["Next.js 16", "Prisma 7", "NextAuth v5", "shadcn/ui"],
-    "liveUrl": null,
-    "healthEndpoint": "/api/health",
-    "githubRepo": "nztinversive/claritydashboard",
-    "links": [
-      { "label": "PRD", "url": "https://github.com/nztinversive/claritydashboard/blob/main/docs/prd.md" }
-    ]
-  },
-  {
-    "id": "fwlandingpage",
-    "name": "FW Landing Page",
-    "emoji": "🏠",
-    "description": "Fading West marketing site showcasing modular home construction",
-    "stack": ["Next.js", "Tailwind", "Upstash Redis"],
-    "liveUrl": "https://fadingwestdevelopment.replit.app",
-    "healthEndpoint": "/",
-    "githubRepo": "nztinversive/fwlandingpage",
-    "links": [
-      { "label": "Marketing", "url": "https://github.com/nztinversive/fwlandingpage" }
-    ]
-  },
-  {
-    "id": "fwmodpicker",
-    "name": "FW Mod Picker",
-    "emoji": "🏗️",
-    "description": "Customer-facing modular home configuration tool",
-    "stack": ["React", "Tailwind"],
-    "liveUrl": null,
-    "healthEndpoint": "/",
-    "githubRepo": "nztinversive/fwmodpicker",
-    "links": [
-      { "label": "Config Tool", "url": "https://github.com/nztinversive/fwmodpicker" }
-    ]
+    "links": []
   },
   {
     "id": "homedesign-ai",
     "name": "Home Design AI",
     "emoji": "🏡",
-    "description": "AI-powered modular home floor plan generator with compliance checking",
-    "stack": ["Next.js 14", "Convex", "TypeScript", "Constraint Engine"],
+    "description": "AI-powered modular home floor plan generator with constraint engine, compliance checking (IRC/ADA/energy), and Convex backend",
+    "stack": ["Next.js 14", "Convex", "TypeScript", "Constraint Engine", "Compliance Engine"],
     "liveUrl": "https://homedesign-ai.onrender.com",
     "healthEndpoint": "/",
     "githubRepo": "nztinversive/homedesign-ai",
@@ -143,29 +46,124 @@
     ]
   },
   {
+    "id": "claritydashboard",
+    "name": "Clarity Dashboard",
+    "emoji": "🎯",
+    "description": "BSC strategy dashboard with goal hierarchy, Focus page, and one-on-one mode",
+    "stack": ["Next.js 16", "Prisma 7", "NextAuth v5", "shadcn/ui"],
+    "liveUrl": null,
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/claritydashboard",
+    "links": []
+  },
+  {
     "id": "keepsake",
     "name": "Keepsake",
     "emoji": "📸",
-    "description": "AI photo transformation app for parents — promptless, feedback-driven",
-    "stack": ["Expo React Native", "Convex", "FastAPI", "Replicate"],
+    "description": "AI photo transformation app for parents — 10 art recipes, webhook-verified, idempotent seeds",
+    "stack": ["Expo React Native", "FastAPI", "Replicate", "Cloudflare R2", "PostgreSQL"],
     "liveUrl": null,
     "healthEndpoint": null,
     "githubRepo": "nztinversive/keepsake-claude",
-    "links": [
-      { "label": "GitHub", "url": "https://github.com/nztinversive/keepsake-claude" }
-    ]
+    "links": []
+  },
+  {
+    "id": "fwimagestudio",
+    "name": "FW Image Studio",
+    "emoji": "🎨",
+    "description": "AI image generation with Flux Kontext Pro, inpainting, batch variations, and Telegram API",
+    "stack": ["Next.js 14", "Replicate API", "Tailwind", "Canvas"],
+    "liveUrl": "https://fw-image-studio.onrender.com",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/fwimagestudio",
+    "links": []
+  },
+  {
+    "id": "fwsalesmap",
+    "name": "FW Sales Map",
+    "emoji": "🗺️",
+    "description": "Interactive Mapbox map for FW sales pipeline with color-coded pins and property details",
+    "stack": ["Next.js 14", "Mapbox GL JS", "Tailwind", "JSON Storage"],
+    "liveUrl": "https://fw-salesmap.onrender.com",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/fwsalesmap",
+    "links": []
+  },
+  {
+    "id": "fwsitechecker",
+    "name": "FW Site Checker",
+    "emoji": "📍",
+    "description": "AI-powered construction site analysis and zoning validation",
+    "stack": ["Next.js 14", "Mapbox GL JS", "OpenAI", "Tailwind"],
+    "liveUrl": "https://fw-sitechecker.onrender.com",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/fwsitechecker",
+    "links": []
+  },
+  {
+    "id": "fw3dwalkthrough",
+    "name": "FW 3D Walkthrough",
+    "emoji": "🔮",
+    "description": "Matterport replacement — 360° panorama viewer with room management and shareable QR codes",
+    "stack": ["Next.js 14", "Pannellum", "Tailwind", "JSON Storage"],
+    "liveUrl": "https://fw-3d-walkthrough.onrender.com",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/fw3dwalkthrough",
+    "links": []
+  },
+  {
+    "id": "commandcenter",
+    "name": "Command Center",
+    "emoji": "🖥️",
+    "description": "Deploy dashboard with live health monitoring, GitHub commit tracking, and auto-refresh",
+    "stack": ["Next.js 14", "Tailwind", "JSON Storage"],
+    "liveUrl": "https://atlas-command-center.onrender.com",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/commandcenter",
+    "links": []
   },
   {
     "id": "fwmp-dashboard",
     "name": "FW MP Dashboard",
     "emoji": "📋",
-    "description": "Construction progress tracker with Matterport scan embedding and AI defect detection",
+    "description": "Construction progress tracker with Matterport embedding, AI defect detection, RBAC, and audit logging",
     "stack": ["Next.js 14", "Prisma", "NextAuth v5", "Moondream"],
     "liveUrl": null,
     "healthEndpoint": "/api/health",
     "githubRepo": "nztinversive/fwmp-dashboard",
-    "links": [
-      { "label": "GitHub", "url": "https://github.com/nztinversive/fwmp-dashboard" }
-    ]
+    "links": []
+  },
+  {
+    "id": "fwlandingpage",
+    "name": "FW Landing Page",
+    "emoji": "🏠",
+    "description": "Fading West marketing site with admin dashboard, form submissions, and Excel export",
+    "stack": ["Next.js", "Tailwind", "Upstash Redis"],
+    "liveUrl": "https://fadingwestdevelopment.replit.app",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/fwlandingpage",
+    "links": []
+  },
+  {
+    "id": "fwmodpicker",
+    "name": "FW Mod Picker",
+    "emoji": "🏗️",
+    "description": "Customer-facing modular home configuration and exterior mod calculator",
+    "stack": ["React", "Tailwind"],
+    "liveUrl": null,
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/fwmodpicker",
+    "links": []
+  },
+  {
+    "id": "duckyjengalofi",
+    "name": "Ducky Jenga Lo-Fi",
+    "emoji": "🎵",
+    "description": "Ambient lo-fi vibe app with YouTube integration — refactored from 4000 to 53 lines",
+    "stack": ["React", "YouTube API", "Canvas", "Tailwind"],
+    "liveUrl": null,
+    "healthEndpoint": null,
+    "githubRepo": "nztinversive/duckyjengalofi",
+    "links": []
   }
 ]
