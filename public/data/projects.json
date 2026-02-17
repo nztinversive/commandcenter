@@ -80,9 +80,9 @@
   {
     "id": "duckyjengalofi",
     "name": "Ducky Jenga Lo-Fi",
-    "emoji": "🎵",
-    "description": "Interactive lo-fi YouTube game with ambient duck vibes",
-    "stack": ["Next.js 14", "YouTube API", "Canvas", "Tailwind"],
+    "emoji": "🦆",
+    "description": "Passive ambient vibe app — 3D Jenga tower, lo-fi beats, day/night/rain scenes",
+    "stack": ["React", "Three.js", "React Three Fiber", "Vite"],
     "liveUrl": null,
     "healthEndpoint": "/",
     "githubRepo": "nztinversive/duckyjengalofi",
@@ -120,9 +120,9 @@
     "id": "homedesign-ai",
     "name": "Home Design AI",
     "emoji": "🏗️",
-    "description": "AI floor plan generator with constraint engine and 3D visualization",
-    "stack": ["Next.js 14", "TypeScript", "Convex", "Three.js"],
-    "liveUrl": null,
+    "description": "AI floor plan generator with constraint engine, SVG renderer, cost estimation, and style presets",
+    "stack": ["Next.js 14", "TypeScript", "Convex", "Tailwind"],
+    "liveUrl": "https://homedesign-ai.onrender.com",
     "healthEndpoint": "/api/health",
     "githubRepo": "nztinversive/homedesign-ai",
     "links": [
@@ -132,10 +132,10 @@
   {
     "id": "fwlandingpage",
     "name": "FW Landing Page",
-    "emoji": "🏠",
-    "description": "Fading West marketing site showcasing modular home construction",
-    "stack": ["Next.js", "Tailwind"],
-    "liveUrl": null,
+    "emoji": "🌐",
+    "description": "Fading West supplier/dealer marketing site with admin portal and Excel export",
+    "stack": ["Express", "Upstash Redis", "ExcelJS"],
+    "liveUrl": "https://fadingwestdevelopment.replit.app",
     "healthEndpoint": "/",
     "githubRepo": "nztinversive/fwlandingpage",
     "links": [
@@ -153,6 +153,19 @@
     "githubRepo": "nztinversive/fwmodpicker",
     "links": [
       { "label": "Config Tool", "url": "https://github.com/nztinversive/fwmodpicker" }
+    ]
+  },
+  {
+    "id": "keepsake",
+    "name": "Keepsake",
+    "emoji": "📸",
+    "description": "AI photo transformation app for parents — promptless, feedback-driven recipes",
+    "stack": ["FastAPI", "Expo React Native", "Replicate", "Convex"],
+    "liveUrl": null,
+    "healthEndpoint": "/health",
+    "githubRepo": "nztinversive/keepsake-claude",
+    "links": [
+      { "label": "PRD", "url": "https://github.com/nztinversive/keepsake-claude/blob/main/docs/prd.md" }
     ]
   }
 ]
