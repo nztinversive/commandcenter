@@ -30,7 +30,7 @@
     "name": "ContentOps",
     "emoji": "✍️",
     "description": "Hormozi-style content generation engine with brand voice and proof vault",
-    "stack": ["Next.js 14", "OpenAI", "Tailwind", "JSON Storage"],
+    "stack": ["Next.js 14", "OpenAI", "Convex", "Tailwind", "NextAuth"],
     "liveUrl": "https://contentops.onrender.com",
     "healthEndpoint": "/api/health",
     "githubRepo": "nztinversive/contentops",
@@ -108,8 +108,8 @@
     "name": "FW Landing Page",
     "emoji": "🏠",
     "description": "Fading West marketing site showcasing modular home construction",
-    "stack": ["Next.js", "Tailwind"],
-    "liveUrl": null,
+    "stack": ["Next.js", "Tailwind", "Upstash Redis"],
+    "liveUrl": "https://fadingwestdevelopment.replit.app",
     "healthEndpoint": "/",
     "githubRepo": "nztinversive/fwlandingpage",
     "links": [
@@ -127,6 +127,45 @@
     "githubRepo": "nztinversive/fwmodpicker",
     "links": [
       { "label": "Config Tool", "url": "https://github.com/nztinversive/fwmodpicker" }
+    ]
+  },
+  {
+    "id": "homedesign-ai",
+    "name": "Home Design AI",
+    "emoji": "🏡",
+    "description": "AI-powered modular home floor plan generator with compliance checking",
+    "stack": ["Next.js 14", "Convex", "TypeScript", "Constraint Engine"],
+    "liveUrl": "https://homedesign-ai.onrender.com",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/homedesign-ai",
+    "links": [
+      { "label": "Convex Dashboard", "url": "https://dashboard.convex.dev/t/thiesnoah/homedesign-ai" }
+    ]
+  },
+  {
+    "id": "keepsake",
+    "name": "Keepsake",
+    "emoji": "📸",
+    "description": "AI photo transformation app for parents — promptless, feedback-driven",
+    "stack": ["Expo React Native", "Convex", "FastAPI", "Replicate"],
+    "liveUrl": null,
+    "healthEndpoint": null,
+    "githubRepo": "nztinversive/keepsake-claude",
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/nztinversive/keepsake-claude" }
+    ]
+  },
+  {
+    "id": "fwmp-dashboard",
+    "name": "FW MP Dashboard",
+    "emoji": "📋",
+    "description": "Construction progress tracker with Matterport scan embedding and AI defect detection",
+    "stack": ["Next.js 14", "Prisma", "NextAuth v5", "Moondream"],
+    "liveUrl": null,
+    "healthEndpoint": "/api/health",
+    "githubRepo": "nztinversive/fwmp-dashboard",
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/nztinversive/fwmp-dashboard" }
     ]
   }
 ]

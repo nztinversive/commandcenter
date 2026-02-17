@@ -7,7 +7,8 @@ const HEALTH_URLS = [
   'https://fw-3d-walkthrough.onrender.com',
   'https://fw-image-studio.onrender.com',
   'https://fw-salesmap.onrender.com',
-  'https://fw-sitechecker.onrender.com'
+  'https://fw-sitechecker.onrender.com',
+  'https://homedesign-ai.onrender.com'
 ] as const;
 
 const REQUEST_TIMEOUT_MS = 10_000;
