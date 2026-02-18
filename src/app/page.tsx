@@ -13,6 +13,9 @@ import ProjectCard from '@/components/ProjectCard';
 import StatsBar from '@/components/StatsBar';
 
 const normalizeUrl = (url: string) => url.replace(/\/+$/, '').toLowerCase();
+const BASE_REFRESH_INTERVAL_SECONDS = 60;
+const MAX_REFRESH_INTERVAL_SECONDS = 900;
+const MAX_CONSECUTIVE_ERRORS = 5;
 
 export default function Dashboard() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -25,6 +28,12 @@ export default function Dashboard() {
   const [lastUpdate, setLastUpdate] = useState<string>(new Date().toISOString());
   const [lastHealthCheckedAt, setLastHealthCheckedAt] = useState<string | null>(null);
   const [nowMs, setNowMs] = useState<number>(() => Date.now());
+  const [consecutiveErrors, setConsecutiveErrors] = useState(0);
+  const refreshIntervalSeconds = Math.min(
+    BASE_REFRESH_INTERVAL_SECONDS * (2 ** consecutiveErrors),
+    MAX_REFRESH_INTERVAL_SECONDS
+  );
+  const isAutoRefreshPaused = consecutiveErrors >= MAX_CONSECUTIVE_ERRORS;
 
   // Load projects data
   useEffect(() => {
@@ -76,8 +85,10 @@ export default function Dashboard() {
       }
 
       setLastUpdate(new Date().toISOString());
+      setConsecutiveErrors(0);
     } catch (error) {
       console.error('Failed to fetch data:', error);
+      setConsecutiveErrors((prev) => Math.min(prev + 1, MAX_CONSECUTIVE_ERRORS));
     } finally {
       setIsLoading(false);
       setIsRefreshing(false);
@@ -89,14 +100,18 @@ export default function Dashboard() {
     void fetchData();
   }, [fetchData]);
 
-  // Auto-refresh every 60 seconds
+  // Auto-refresh with exponential backoff after failures
   useEffect(() => {
+    if (isAutoRefreshPaused) {
+      return;
+    }
+
     const interval = setInterval(() => {
       void fetchData(true);
-    }, 60000);
+    }, refreshIntervalSeconds * 1000);
 
     return () => clearInterval(interval);
-  }, [fetchData]);
+  }, [fetchData, refreshIntervalSeconds, isAutoRefreshPaused]);
 
   const liveHealthByUrl = useMemo(() => {
     const entries = liveHealthData.map((ping) => [normalizeUrl(ping.url), ping] as const);
@@ -175,6 +190,18 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <div className="px-6 py-6">
+        {isAutoRefreshPaused && (
+          <div className="mb-6 flex items-center justify-between gap-4 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3">
+            <span className="text-sm text-red-100">Auto-refresh paused due to errors</span>
+            <button
+              type="button"
+              onClick={() => fetchData(true)}
+              className="rounded-md border border-red-300/40 bg-red-400/10 px-3 py-1 text-xs font-medium text-red-100 hover:bg-red-400/20 transition-colors"
+            >
+              Retry Now
+            </button>
+          </div>
+        )}
         <div className="mb-6 flex items-center justify-between gap-4">
           <span className="text-white/60 text-sm">
             {searchQuery ? (
@@ -186,9 +213,16 @@ export default function Dashboard() {
               ''
             )}
           </span>
-          <span className="text-white/40 text-xs">
-            Last checked: {healthAgeSeconds === null ? 'Not checked yet' : `${healthAgeSeconds}s ago`}
-          </span>
+          <div className="text-right">
+            <span className="text-white/40 text-xs">
+              Last checked: {healthAgeSeconds === null ? 'Not checked yet' : `${healthAgeSeconds}s ago`}
+            </span>
+            {consecutiveErrors > 0 && !isAutoRefreshPaused && (
+              <div className="text-white/40 text-[11px] mt-1">
+                Retrying in {refreshIntervalSeconds}s...
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Project Grid */}
