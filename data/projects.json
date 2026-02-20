@@ -165,5 +165,60 @@
     "healthEndpoint": null,
     "githubRepo": "nztinversive/duckyjengalofi",
     "links": []
+  },
+  {
+    "id": "bladescope",
+    "name": "BladeScope",
+    "emoji": "🌀",
+    "description": "Wind turbine blade defect detection with trained AI model — deployed and operational",
+    "stack": ["Python", "Computer Vision", "AI/ML"],
+    "liveUrl": "https://bladescope.onrender.com",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/bladescope",
+    "links": []
+  },
+  {
+    "id": "drone-portal",
+    "name": "Drone Deliverable Portal",
+    "emoji": "🚁",
+    "description": "Job management with drag-drop media upload, branded public portal, and shareable view links",
+    "stack": ["Next.js 14", "Tailwind", "JSON Storage"],
+    "liveUrl": null,
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/drone-portal",
+    "links": []
+  },
+  {
+    "id": "solar-inspection",
+    "name": "Solar Inspection",
+    "emoji": "☀️",
+    "description": "Thermal/RGB image analysis with AI defect detection, panel health maps, and severity scoring",
+    "stack": ["Next.js 14", "OpenAI Vision", "Tailwind"],
+    "liveUrl": null,
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/solar-inspection",
+    "links": []
+  },
+  {
+    "id": "drone-digitaltwin",
+    "name": "Drone Digital Twin",
+    "emoji": "🛸",
+    "description": "Digital twin visualization for drone fleet and infrastructure monitoring",
+    "stack": ["Next.js 14", "Three.js", "Tailwind"],
+    "liveUrl": "https://drone-digitaltwin.onrender.com",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/drone-digitaltwin",
+    "links": []
+  },
+  {
+    "id": "fleet-health-engine",
+    "name": "Fleet Health Engine",
+    "emoji": "🔧",
+    "description": "Drone fleet health monitoring, maintenance scheduling, and predictive analytics",
+    "stack": ["Next.js 14", "Tailwind", "JSON Storage"],
+    "liveUrl": "https://fleet-health-engine.onrender.com",
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/fleet-health-engine",
+    "links": []
   }
 ]
