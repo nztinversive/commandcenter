@@ -211,6 +211,17 @@
     "links": []
   },
   {
+    "id": "ai-usage-dashboard",
+    "name": "AI Usage Dashboard",
+    "emoji": "📊",
+    "description": "Provider usage cards, trend charts, session history, and cost alerts for Codex/Claude/ChatGPT",
+    "stack": ["Next.js 14", "Recharts", "Tailwind", "JSON Storage"],
+    "liveUrl": null,
+    "healthEndpoint": "/",
+    "githubRepo": "nztinversive/ai-usage-dashboard",
+    "links": []
+  },
+  {
     "id": "fleet-health-engine",
     "name": "Fleet Health Engine",
     "emoji": "🔧",
